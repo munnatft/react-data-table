@@ -1,0 +1,159 @@
+html {
+  font-size: 62.5%;
+}
+
+#root {
+  width: 75vw;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #09090B;
+}
+
+* {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.container {
+  border-radius: 5px;
+  border: 1px solid grey;
+  width: 100%;
+}
+.table-container {
+  position: relative;
+  width: 100%;
+  max-height: 600px;
+  overflow: auto;
+}
+.table {
+  width: 100%;
+  caption-side: bottom;
+  font-size: 16px;
+  color: #fff;
+  border-color: inherit;
+  border-collapse: collapse;
+  text-indent: 0;
+  text-align: left;
+  padding: 10px 20px;
+}
+.thead tr {
+  border-bottom: 1px solid grey;
+}
+
+.tbody tr {
+  border-bottom: 1px solid grey;
+}
+
+.tbody tr:last-child {
+  border-bottom: 0;
+}
+
+th {
+  height: 40px;
+  padding: 0 8px;
+  text-align: left;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+th:first-child {
+  padding-left: 10px;
+}
+
+th:last-child {
+  padding-right: 20px;
+}
+
+td {
+  padding: 8px;
+}
+
+td:first-child {
+  padding-left: 10px;
+}
+
+td:last-child {
+  padding-right: 20px;
+}
+
+p {
+  max-width: 250px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.status {
+  width: 100px;
+}
+
+::-webkit-scrollbar {
+  width: 0.7rem;
+  height: 0.7rem;
+  padding-right: 0.7rem;
+  margin-right: 0.7rem;
+  margin-left: 0.7rem;
+}
+::-webkit-scrollbar-track {
+  background-color: #dfe1e4;
+  border-radius: 5rem;
+  padding-right: 0.7rem;
+  margin-right: 0.7rem;
+  margin-left: 0.7rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a7b4c3;
+  border-radius: 5rem;
+}
+
+.toolbar-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 5px;
+
+  & input {
+    padding: 5px 10px;
+  }
+}
+
+input:focus {
+  outline: none;
+}
