@@ -157,3 +157,10 @@ p {
 input:focus {
   outline: none;
 }
+
+.sortingColumnHeader {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}

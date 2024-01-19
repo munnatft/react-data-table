@@ -1,9 +1,11 @@
 import {
   ColumnDef,
+  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import {
@@ -27,6 +29,7 @@ const DataTable = <TData extends {id: string}, TValue>({
   data,
 }: DataTableProps<TData, TValue>) => {
   const [rowSelection, setRowSelection] = useState({})
+  const [sorting, setSorting] = useState<SortingState>([])
   const table = useReactTable({
     data,
     columns,
@@ -35,8 +38,10 @@ const DataTable = <TData extends {id: string}, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     onRowSelectionChange: setRowSelection,
-    state: { rowSelection }
+    onSortingChange: setSorting,
+    state: { rowSelection, sorting }
   });
 
   return (

@@ -1,5 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { Task } from "./type";
+import { DataTableColumnHeader } from "./data-table-column-heaer";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -37,7 +38,9 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Status" />
+    ),
     cell: ({ row }) => {
       return <div className="status">{row.getValue("status")}</div>;
     },
