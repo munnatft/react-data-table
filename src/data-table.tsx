@@ -1,5 +1,7 @@
 import {
   ColumnDef,
+  OnChangeFn,
+  PaginationState,
   SortingState,
   flexRender,
   getCoreRowModel,
@@ -22,14 +24,20 @@ import { useState } from "react";
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  pagination?: PaginationState;
+  onPaginationChange?: OnChangeFn<PaginationState>
 };
 
-const DataTable = <TData extends {id: string}, TValue>({
+const DataTable = <TData extends { id: string }, TValue>({
   columns,
   data,
+  pagination,
+  onPaginationChange
 }: DataTableProps<TData, TValue>) => {
-  const [rowSelection, setRowSelection] = useState({})
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [rowSelection, setRowSelection] = useState({});
+  const [sorting, setSorting] = useState<SortingState>([]);
+  
+
   const table = useReactTable({
     data,
     columns,
@@ -41,7 +49,14 @@ const DataTable = <TData extends {id: string}, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
-    state: { rowSelection, sorting }
+    onPaginationChange: onPaginationChange,
+    state: {
+      rowSelection,
+      sorting,
+      pagination: pagination,
+    },
+    manualPagination: true,
+    pageCount: 10,
   });
 
   return (
@@ -98,8 +113,8 @@ const DataTable = <TData extends {id: string}, TValue>({
       <button
         onClick={() => {
           console.log(table.getSelectedRowModel());
-          console.log(table.getState().rowSelection)
-          console.log(table.getFilteredSelectedRowModel())
+          console.log(table.getState().rowSelection);
+          console.log(table.getFilteredSelectedRowModel());
         }}
       >
         Get Selected Row Values
@@ -109,30 +124,30 @@ const DataTable = <TData extends {id: string}, TValue>({
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
         >
-          {'<<'}
+          {"<<"}
         </button>
         <button
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          {'<'}
+          {"<"}
         </button>
         <button
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          {'>'}
+          {">"}
         </button>
         <button
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
         >
-          {'>>'}
+          {">>"}
         </button>
         <span>
           <div>Page</div>
           <strong>
-            {table.getState().pagination.pageIndex + 1} of{' '}
+            {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
           </strong>
         </span>
@@ -141,19 +156,19 @@ const DataTable = <TData extends {id: string}, TValue>({
           <input
             type="number"
             defaultValue={table.getState().pagination.pageIndex + 1}
-            onChange={e => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
-              table.setPageIndex(page)
+            onChange={(e) => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              table.setPageIndex(page);
             }}
           />
         </span>
         <select
           value={table.getState().pagination.pageSize}
-          onChange={e => {
-            table.setPageSize(Number(e.target.value))
+          onChange={(e) => {
+            table.setPageSize(Number(e.target.value));
           }}
         >
-          {[10, 20, 30, 40, 50].map(pageSize => (
+          {[10, 20, 30, 40, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>

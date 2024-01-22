@@ -22,7 +22,10 @@ export const columns: ColumnDef<Task>[] = [
       <input
         type="checkbox"
         checked={row.getIsSelected()}
-        onChange={(e) => row.toggleSelected(e.target.checked)}
+        onChange={(e) => {
+          console.log(row.id)
+          row.toggleSelected(e.target.checked)
+        }}
         aria-label="Select row"
       />
     ),
@@ -51,6 +54,9 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "priority",
-    header: "Priority",
-  },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Priority" />
+    ),
+    sortDescFirst: true,
+  }
 ];
